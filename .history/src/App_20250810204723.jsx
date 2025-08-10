@@ -163,19 +163,19 @@ const useLanguage = () => {
 
 // Language Provider Component
 function LanguageProvider({ children }) {
-  const [language, setLanguage] = useState('en'); // Default to 'en' on server
-
-  // Use useEffect to set language from localStorage only on client
-  useEffect(() => {
-    const saved = localStorage.getItem('preferredLanguage');
-    if (saved) {
-      setLanguage(saved);
+  const [language, setLanguage] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('preferredLanguage');
+      return saved || 'en';
     }
-  }, []);
+    return 'en';
+  });
 
   const changeLanguage = (newLang) => {
     setLanguage(newLang);
-    localStorage.setItem('preferredLanguage', newLang);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('preferredLanguage', newLang);
+    }
   };
 
   const t = translations[language] || translations.en;
