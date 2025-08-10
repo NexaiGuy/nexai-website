@@ -958,45 +958,74 @@ function NexAIWebsite() {
     if (selectedTimeSlot) {
       setSendingEmails(true);
       
-      try {
-        // Send emails via your Netlify function
-        const response = await fetch('/.netlify/functions/send-emails', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            formData: {
-              name: formData.name,
-              email: formData.email,
-              company: formData.company,
-              phone: formData.phone,
-              projectType: selectedProject?.title || formData.projectType,
-              budget: budgetRanges.find(b => b.id === formData.budget)?.label || formData.budget,
-              timeline: timelineOptions.find(t => t.id === formData.timeline)?.label || formData.timeline,
-              description: formData.description
-            },
-            timeSlot: selectedTimeSlot
-          })
-        });
-        
-        const result = await response.json();
-        
-        if (response.ok && result.success) {
-          console.log('✅ Emails sent successfully!');
-          setSendingEmails(false);
-          setBookingConfirmed(true);
-        } else {
-          throw new Error(result.error || result.details || 'Failed to send emails');
+      // Prepare email data
+      const emailData = {
+        companyEmail: {
+          to: 'hello@nexai.com',
+          subject: `New AI Project Consultation Request - ${formData.company}`,
+          body: `
+            NEW CONSULTATION BOOKING
+            ========================
+            
+            Client Information:
+            - Name: ${formData.name}
+            - Email: ${formData.email}
+            - Company: ${formData.company}
+            - Phone: ${formData.phone || 'Not provided'}
+            
+            Project Details:
+            - Service Type: ${selectedProject?.title}
+            - Budget Range: ${budgetRanges.find(b => b.id === formData.budget)?.label}
+            - Timeline: ${timelineOptions.find(t => t.id === formData.timeline)?.label}
+            - Meeting Time: ${selectedTimeSlot}
+            
+            Project Description:
+            ${formData.description}
+          `
+        },
+        clientEmail: {
+          to: formData.email,
+          subject: `Your AI Consultation is Confirmed - Nex AI`,
+          body: `
+            Hi ${formData.name},
+            
+            Thank you for booking a consultation with Nex AI! We're excited to discuss your ${selectedProject?.title} project.
+            
+            YOUR CONSULTATION DETAILS:
+            -------------------------
+            Date & Time: ${selectedTimeSlot}
+            Duration: 30 minutes
+            Format: Video call (link will be sent 24 hours before)
+            
+            We'll send you a calendar invite and meeting link shortly.
+            
+            Best regards,
+            The Nex AI Team
+          `
         }
-      } catch (error) {
-        console.error('❌ Email sending failed:', error);
+      };
+
+      try {
+        // Simulate email sending delay
+        await new Promise(resolve => setTimeout(resolve, 2000));
         
-        // Show user-friendly error but still confirm booking
-        alert(`Meeting confirmed! However, there was an issue sending confirmation emails. We'll contact you directly at ${formData.email}.`);
+        // Demo mode: Show email content in console
+        console.log('=== DEMO MODE: Email Preview ===');
+        console.log('\n📧 COMPANY EMAIL:');
+        console.log('To:', emailData.companyEmail.to);
+        console.log('Subject:', emailData.companyEmail.subject);
+        console.log('Body:', emailData.companyEmail.body);
+        
+        console.log('\n📧 CLIENT EMAIL:');
+        console.log('To:', emailData.clientEmail.to);
+        console.log('Subject:', emailData.clientEmail.subject);
+        console.log('Body:', emailData.clientEmail.body);
         
         setSendingEmails(false);
         setBookingConfirmed(true);
+      } catch (error) {
+        console.error('Error:', error);
+        setSendingEmails(false);
       }
     }
   };
