@@ -1716,27 +1716,13 @@ function NexAIWebsite() {
           </div>
 
           <div className="text-center mt-12">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button 
-                onClick={() => setShowForm(true)}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-blue-600 text-white px-10 py-4 rounded-lg font-bold text-lg hover:from-green-600 hover:to-blue-700 transition-all shadow-lg"
-              >
-                Get Your Free Custom Proposal
-                <ArrowRight className="w-5 h-5" />
-              </button>
-              
-              <span className="text-gray-400">or</span>
-              
-              <a 
-                href="https://calendly.com/nex-ai/30min"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border-2 border-blue-500 text-blue-400 px-8 py-4 rounded-lg font-semibold hover:bg-blue-500 hover:text-white transition-all"
-              >
-                <Calendar className="w-5 h-5" />
-                Schedule Directly
-              </a>
-            </div>
+            <button 
+              onClick={() => setShowForm(true)}
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-blue-600 text-white px-10 py-4 rounded-lg font-bold text-lg hover:from-green-600 hover:to-blue-700 transition-all shadow-lg"
+            >
+              Get Your Free Custom Proposal
+              <ArrowRight className="w-5 h-5" />
+            </button>
             <p className="text-gray-400 mt-4">No commitment required • Response within 24 hours</p>
           </div>
         </div>
@@ -1767,25 +1753,13 @@ function NexAIWebsite() {
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button 
-                  onClick={() => setShowForm(true)}
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all flex-1"
-                >
-                  {t.about.consultation}
-                  <ArrowRight className="w-5 h-5" />
-                </button>
-                
-                <a 
-                  href="https://calendly.com/nex-ai/30min"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 border-2 border-blue-500 text-blue-400 px-6 py-4 rounded-lg font-semibold hover:bg-blue-500 hover:text-white transition-all"
-                >
-                  <Calendar className="w-5 h-5" />
-                  Calendly
-                </a>
-              </div>
+              <button 
+                onClick={() => setShowForm(true)}
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all"
+              >
+                {t.about.consultation}
+                <ArrowRight className="w-5 h-5" />
+              </button>
             </div>
 
             <div className="space-y-6">
@@ -1878,27 +1852,13 @@ function NexAIWebsite() {
           </div>
 
           <div className="text-center mt-12">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button 
-                onClick={() => setShowForm(true)}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all"
-              >
-                {t.portfolio.startProject}
-                <ArrowRight className="w-5 h-5" />
-              </button>
-              
-              <span className="text-gray-400">or</span>
-              
-              <a 
-                href="https://calendly.com/nex-ai/30min"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border-2 border-blue-500 text-blue-400 px-6 py-4 rounded-lg font-semibold hover:bg-blue-500 hover:text-white transition-all"
-              >
-                <Calendar className="w-5 h-5" />
-                Quick Call
-              </a>
-            </div>
+            <button 
+              onClick={() => setShowForm(true)}
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all"
+            >
+              {t.portfolio.startProject}
+              <ArrowRight className="w-5 h-5" />
+            </button>
           </div>
         </div>
       </section>
@@ -1998,31 +1958,13 @@ function NexAIWebsite() {
                 </ul>
               </div>
 
-              <div className="space-y-4">
-                <button 
-                  onClick={() => setShowForm(true)}
-                  className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 px-6 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all flex items-center justify-center gap-2 text-lg"
-                >
-                  {t.contact.bookConsultation}
-                  <ArrowRight className="w-5 h-5" />
-                </button>
-
-                <div className="flex items-center gap-4">
-                  <div className="flex-1 h-px bg-gray-600"></div>
-                  <span className="text-gray-400 text-sm">or</span>
-                  <div className="flex-1 h-px bg-gray-600"></div>
-                </div>
-
-                <a 
-                  href="https://calendly.com/nex-ai/30min"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full border-2 border-blue-500 text-blue-400 py-4 px-6 rounded-lg font-semibold hover:bg-blue-500 hover:text-white transition-all flex items-center justify-center gap-2 text-lg"
-                >
-                  <Calendar className="w-5 h-5" />
-                  Schedule via Calendly
-                </a>
-              </div>
+              <button 
+                onClick={() => setShowForm(true)}
+                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 px-6 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all flex items-center justify-center gap-2 text-lg"
+              >
+                {t.contact.bookConsultation}
+                <ArrowRight className="w-5 h-5" />
+              </button>
 
               <p className="text-center text-gray-400 text-sm mt-4">
                 {t.contact.responds}
