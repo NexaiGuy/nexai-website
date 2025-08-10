@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
-import { ArrowRight, Menu, X, Clock, DollarSign, Music, Video, Code, Globe, Zap } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Menu, X, CheckCircle, Star, Users, Clock, DollarSign, Music, Video, Code, Globe, Zap, Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram, Calendar, ChevronDown } from 'lucide-react';
 
 // Translation System
 const translations = {
@@ -163,21 +163,19 @@ const useLanguage = () => {
 
 // Language Provider Component
 function LanguageProvider({ children }) {
-  const [language, setLanguage] = useState('en'); // Default to 'en' on first render
+  const [language, setLanguage] = useState('en'); // Default to 'en' on server
 
-  // Safely read localStorage only on client
+  // Use useEffect to set language from localStorage only on client
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem('preferredLanguage');
-      if (saved) setLanguage(saved);
-    } catch {}
+    const saved = localStorage.getItem('preferredLanguage');
+    if (saved) {
+      setLanguage(saved);
+    }
   }, []);
 
   const changeLanguage = (newLang) => {
     setLanguage(newLang);
-    try {
-      localStorage.setItem('preferredLanguage', newLang);
-    } catch {}
+    localStorage.setItem('preferredLanguage', newLang);
   };
 
   const t = translations[language] || translations.en;
@@ -213,9 +211,23 @@ function LanguageSelector() {
       >
         <span className="text-lg flex-shrink-0">{currentLang.flag}</span>
         <span className="hidden sm:inline text-sm font-medium">{currentLang.name}</span>
+        {/* Chevron icon that's always visible */}
         <span className={`inline-block transition-transform duration-200 flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-            <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <svg 
+            width="16" 
+            height="16" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg"
+            className="text-white"
+          >
+            <path 
+              d="M6 9L12 15L18 9" 
+              stroke="currentColor" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            />
           </svg>
         </span>
       </button>
@@ -229,14 +241,29 @@ function LanguageSelector() {
                 changeLanguage(lang.code);
                 setIsOpen(false);
               }}
-              className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-700 transition-colors ${language === lang.code ? 'bg-gray-700/50' : ''}`}
+              className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-700 transition-colors ${
+                language === lang.code ? 'bg-gray-700/50' : ''
+              }`}
             >
               <span className="text-lg flex-shrink-0">{lang.flag}</span>
               <span className="text-white text-sm whitespace-nowrap font-medium">{lang.name}</span>
               {language === lang.code && (
                 <span className="ml-auto flex-shrink-0">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="text-green-400">
-                    <path d="M20 6L9 17L5 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg 
+                    width="16" 
+                    height="16" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="text-green-400"
+                  >
+                    <path 
+                      d="M20 6L9 17L5 13" 
+                      stroke="currentColor" 
+                      strokeWidth="2" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </span>
               )}
@@ -267,7 +294,7 @@ function NexAIWebsite() {
   ];
 
   function getIcon(iconName, className) {
-    switch (iconName) {
+    switch(iconName) {
       case 'music':
         return <Music className={className} />;
       case 'video':
@@ -284,11 +311,46 @@ function NexAIWebsite() {
   }
 
   const services = [
-    { id: 'music', title: 'AI Music Production', icon: 'music', description: 'Professional AI-generated music tailored to your brand.', price: 'Starting at $500', timeline: '2-5 days' },
-    { id: 'video', title: 'AI Video Creation', icon: 'video', description: 'Intelligent video editing and content generation.', price: 'Starting at $1,000', timeline: '3-7 days' },
-    { id: 'development', title: 'AI Application Development', icon: 'code', description: 'Custom AI-powered software solutions.', price: 'Starting at $5,000', timeline: '2-8 weeks' },
-    { id: 'website', title: 'AI Website Development', icon: 'globe', description: 'Smart websites with AI-powered features.', price: 'Starting at $3,000', timeline: '1-4 weeks' },
-    { id: 'automation', title: 'AI Process Automation', icon: 'zap', description: 'Streamline workflows with intelligent automation.', price: 'Starting at $2,000', timeline: '1-3 weeks' }
+    {
+      id: 'music',
+      title: 'AI Music Production',
+      icon: 'music',
+      description: 'Professional AI-generated music tailored to your brand.',
+      price: 'Starting at $500',
+      timeline: '2-5 days'
+    },
+    {
+      id: 'video',
+      title: 'AI Video Creation',
+      icon: 'video',
+      description: 'Intelligent video editing and content generation.',
+      price: 'Starting at $1,000',
+      timeline: '3-7 days'
+    },
+    {
+      id: 'development',
+      title: 'AI Application Development',
+      icon: 'code',
+      description: 'Custom AI-powered software solutions.',
+      price: 'Starting at $5,000',
+      timeline: '2-8 weeks'
+    },
+    {
+      id: 'website',
+      title: 'AI Website Development',
+      icon: 'globe',
+      description: 'Smart websites with AI-powered features.',
+      price: 'Starting at $3,000',
+      timeline: '1-4 weeks'
+    },
+    {
+      id: 'automation',
+      title: 'AI Process Automation',
+      icon: 'zap',
+      description: 'Streamline workflows with intelligent automation.',
+      price: 'Starting at $2,000',
+      timeline: '1-3 weeks'
+    }
   ];
 
   // Simple form view
@@ -298,7 +360,10 @@ function NexAIWebsite() {
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 max-w-2xl w-full border border-white/20 text-center">
           <h2 className="text-3xl font-bold text-white mb-6">Contact Form</h2>
           <p className="text-gray-300 mb-6">This is where the form would be displayed.</p>
-          <button onClick={() => setShowForm(false)} className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+          <button 
+            onClick={() => setShowForm(false)}
+            className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+          >
             Back to Website
           </button>
         </div>
@@ -313,9 +378,11 @@ function NexAIWebsite() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Nex AI</div>
+              <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                Nex AI
+              </div>
             </div>
-
+            
             <div className="hidden md:flex items-center gap-6">
               <div className="flex items-baseline space-x-4">
                 <a href="#home" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">{t.nav.home}</a>
@@ -324,10 +391,13 @@ function NexAIWebsite() {
                 <a href="#portfolio" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">{t.nav.portfolio}</a>
                 <a href="#contact" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">{t.nav.contact}</a>
               </div>
-
+              
               <LanguageSelector />
-
-              <button onClick={() => setShowForm(true)} className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all flex items-center gap-2">
+              
+              <button 
+                onClick={() => setShowForm(true)}
+                className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all flex items-center gap-2"
+              >
                 {t.nav.getProposal}
                 <ArrowRight className="w-4 h-4" />
               </button>
@@ -335,7 +405,10 @@ function NexAIWebsite() {
 
             <div className="md:hidden flex items-center gap-3">
               <LanguageSelector />
-              <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-gray-400 hover:text-white p-2">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-gray-400 hover:text-white p-2"
+              >
                 {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
             </div>
@@ -351,7 +424,10 @@ function NexAIWebsite() {
               <a href="#about" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">{t.nav.about}</a>
               <a href="#portfolio" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">{t.nav.portfolio}</a>
               <a href="#contact" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">{t.nav.contact}</a>
-              <button onClick={() => setShowForm(true)} className="bg-gradient-to-r from-blue-500 to-purple-600 text-white block px-3 py-2 rounded-md text-base font-medium text-center w-full">
+              <button 
+                onClick={() => setShowForm(true)}
+                className="bg-gradient-to-r from-blue-500 to-purple-600 text-white block px-3 py-2 rounded-md text-base font-medium text-center w-full"
+              >
                 {t.nav.getProposal}
               </button>
             </div>
@@ -362,22 +438,32 @@ function NexAIWebsite() {
       {/* Hero Section */}
       <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-cyan-900/20"></div>
-
+        
         <div className={`relative z-10 text-center max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent">{t.hero.title1}</span>
+            <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
+              {t.hero.title1}
+            </span>
             <br />
             <span className="text-white">{t.hero.title2}</span>
           </h1>
-
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">{t.hero.subtitle}</p>
-
+          
+          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+            {t.hero.subtitle}
+          </p>
+          
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button onClick={() => setShowForm(true)} className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all text-lg flex items-center justify-center gap-2">
+            <button 
+              onClick={() => setShowForm(true)}
+              className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all text-lg flex items-center justify-center gap-2"
+            >
               {t.hero.cta1}
               <ArrowRight className="w-5 h-5" />
             </button>
-            <a href="#services" className="border-2 border-white/30 text-white px-8 py-4 rounded-lg font-semibold hover:bg-white/10 transition-all text-lg">
+            <a 
+              href="#services" 
+              className="border-2 border-white/30 text-white px-8 py-4 rounded-lg font-semibold hover:bg-white/10 transition-all text-lg"
+            >
               {t.hero.cta2}
             </a>
           </div>
@@ -401,17 +487,24 @@ function NexAIWebsite() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">{t.services.title}</span>
+              <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                {t.services.title}
+              </span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">{t.services.subtitle}</p>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              {t.services.subtitle}
+            </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service) => (
-              <div key={service.id} className="bg-gray-900/50 backdrop-blur-lg rounded-2xl p-8 border border-gray-700 hover:border-blue-500/50 transition-all duration-300 group hover:transform hover:scale-105">
+              <div 
+                key={service.id}
+                className="bg-gray-900/50 backdrop-blur-lg rounded-2xl p-8 border border-gray-700 hover:border-blue-500/50 transition-all duration-300 group hover:transform hover:scale-105"
+              >
                 <div className="flex items-center gap-4 mb-6">
                   <div className="p-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl text-white group-hover:scale-110 transition-transform">
-                    {getIcon(service.icon, 'w-8 h-8')}
+                    {getIcon(service.icon, "w-8 h-8")}
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-white">{service.title}</h3>
@@ -427,10 +520,13 @@ function NexAIWebsite() {
                     </div>
                   </div>
                 </div>
-
+                
                 <p className="text-gray-300 mb-6">{service.description}</p>
-
-                <button onClick={() => setShowForm(true)} className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all flex items-center justify-center gap-2">
+                
+                <button 
+                  onClick={() => setShowForm(true)}
+                  className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all flex items-center justify-center gap-2"
+                >
                   {t.services.getStarted}
                   <ArrowRight className="w-4 h-4" />
                 </button>
