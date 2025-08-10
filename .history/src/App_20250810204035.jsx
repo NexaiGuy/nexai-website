@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
-import { ArrowRight, Menu, X, Clock, DollarSign, Music, Video, Code, Globe, Zap } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Menu, X, CheckCircle, Star, Users, Clock, DollarSign, Music, Video, Code, Globe, Zap, Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram, Calendar, ChevronDown } from 'lucide-react';
 
 // Translation System
 const translations = {
