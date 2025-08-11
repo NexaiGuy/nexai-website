@@ -1899,7 +1899,7 @@ function NexAIWebsite() {
                     <Mail className="w-6 h-6 text-blue-400 mt-1" />
                     <div>
                       <h4 className="text-white font-semibold">Email</h4>
-                      <p className="text-gray-300">nexai.guide@gmail.com</p>
+                      <p className="text-gray-300">nexai..com</p>
                     </div>
                   </div>
                   

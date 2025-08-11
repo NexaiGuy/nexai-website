@@ -1195,7 +1195,7 @@ function NexAIWebsite() {
                         <div className="text-green-400 text-sm font-medium mb-2">📧 {t.calendar.readyToSend}</div>
                         <div className="text-white text-sm">
                           <div>Your email: <span className="font-medium">{formData.email}</span></div>
-                          <div>Our team: <span className="font-medium">nexai.guide@gmail.com</span></div>
+                          <div>Our team: <span className="font-medium">nexai.guide@g.com</span></div>
                         </div>
                       </div>
                     )}
@@ -1899,7 +1899,7 @@ function NexAIWebsite() {
                     <Mail className="w-6 h-6 text-blue-400 mt-1" />
                     <div>
                       <h4 className="text-white font-semibold">Email</h4>
-                      <p className="text-gray-300">nexai.guide@gmail.com</p>
+                      <p className="text-gray-300">hello@nexai.com</p>
                     </div>
                   </div>
                   
@@ -1915,7 +1915,7 @@ function NexAIWebsite() {
                     <MapPin className="w-6 h-6 text-blue-400 mt-1" />
                     <div>
                       <h4 className="text-white font-semibold">Location</h4>
-                      <p className="text-gray-300">Gent</p>
+                      <p className="text-gray-300">San Francisco, CA</p>
                     </div>
                   </div>
                 </div>

@@ -1899,7 +1899,7 @@ function NexAIWebsite() {
                     <Mail className="w-6 h-6 text-blue-400 mt-1" />
                     <div>
                       <h4 className="text-white font-semibold">Email</h4>
-                      <p className="text-gray-300">nexai.guide@gmail.com</p>
+                      <p className="text-gray-300">hello@nexai.com</p>
                     </div>
                   </div>
                   
@@ -1907,7 +1907,7 @@ function NexAIWebsite() {
                     <Phone className="w-6 h-6 text-blue-400 mt-1" />
                     <div>
                       <h4 className="text-white font-semibold">Phone</h4>
-                      <p className="text-gray-300">+1 (555) 123-4567</p>
+                      <p className="text-gray-300">+32</p>
                     </div>
                   </div>
                   
