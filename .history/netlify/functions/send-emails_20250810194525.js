@@ -1,22 +1,8 @@
 const sgMail = require('@sendgrid/mail');
 
-exports.handler = async (event, context) => {
-  console.log('Function called with method:', event.httpMethod);
-  
-  // Set the API key
-  const apiKey = process.env.SENDGRID_API_KEY;
-  if (!apiKey) {
-    console.error('SENDGRID_API_KEY not found in environment variables');
-    return {
-      statusCode: 500,
-      headers: { 'Access-Control-Allow-Origin': '*' },
-      body: JSON.stringify({ success: false, error: 'SendGrid API key not configured' })
-    };
-  }
-  
-  sgMail.setApiKey(apiKey);
-  console.log('SendGrid API key set');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
+exports.handler = async (event, context) => {
   // Only allow POST requests
   if (event.httpMethod !== 'POST') {
     return {
@@ -43,21 +29,12 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    console.log('Parsing request body...');
     const { formData, timeSlot } = JSON.parse(event.body);
-    console.log('Form data received:', formData);
-    console.log('Time slot:', timeSlot);
-
-    const verifiedSender = process.env.SENDGRID_VERIFIED_SENDER || 'hello@nexai.com';
-    const companyEmail = process.env.COMPANY_EMAIL || 'hello@nexai.com';
-    
-    console.log('Using verified sender:', verifiedSender);
-    console.log('Sending to company email:', companyEmail);
 
     // Company notification email
-    const companyEmailData = {
-      to: companyEmail,
-      from: verifiedSender,
+    const companyEmail = {
+      to: process.env.COMPANY_EMAIL || 'hello@nexai.com',
+      from: process.env.SENDGRID_VERIFIED_SENDER || 'hello@nexai.com',
       subject: `New Consultation Request - ${formData.company}`,
       html: `
         <!DOCTYPE html>
@@ -106,9 +83,9 @@ exports.handler = async (event, context) => {
     };
 
     // Client confirmation email
-    const clientEmailData = {
+    const clientEmail = {
       to: formData.email,
-      from: verifiedSender,
+      from: process.env.SENDGRID_VERIFIED_SENDER || 'hello@nexai.com',
       subject: 'Your AI Consultation is Confirmed - Nex AI',
       html: `
         <!DOCTYPE html>
@@ -119,6 +96,7 @@ exports.handler = async (event, context) => {
             .container { max-width: 600px; margin: 0 auto; padding: 20px; }
             .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; text-align: center; border-radius: 10px 10px 0 0; }
             .content { background: white; padding: 40px; border: 1px solid #e0e0e0; border-radius: 0 0 10px 10px; }
+            .button { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; display: inline-block; margin: 20px 0; }
             .info-card { background: #f8f9fa; padding: 25px; margin: 20px 0; border-radius: 10px; }
             .footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0e0e0; color: #666; }
           </style>
@@ -174,13 +152,9 @@ exports.handler = async (event, context) => {
       `
     };
 
-    console.log('Sending company email...');
-    await sgMail.send(companyEmailData);
-    console.log('Company email sent successfully');
-
-    console.log('Sending client email...');
-    await sgMail.send(clientEmailData);
-    console.log('Client email sent successfully');
+    // Send both emails
+    await sgMail.send(companyEmail);
+    await sgMail.send(clientEmail);
 
     return {
       statusCode: 200,
@@ -195,8 +169,7 @@ exports.handler = async (event, context) => {
     };
 
   } catch (error) {
-    console.error('Detailed error:', error);
-    console.error('Error response:', error.response?.body);
+    console.error('Error sending emails:', error);
     
     return {
       statusCode: 500,
@@ -207,8 +180,7 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({
         success: false,
         error: 'Failed to send emails',
-        details: error.message,
-        sendGridError: error.response?.body
+        details: error.message
       })
     };
   }
