@@ -1910,7 +1910,7 @@ function NexAIWebsite() {
                       <p className="text-gray-300">+1 (555) 123-4567</p>
                     </div>
                   </div>
-                
+                  
                   
                   <div className="flex items-start gap-4">
                     <MapPin className="w-6 h-6 text-blue-400 mt-1" />

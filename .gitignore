@@ -55,3 +55,5 @@ yarn.lock
 pnpm-lock.yamlsendgrid.env
 .env
 sendgrid.env
+.env
+sendgrid.env
