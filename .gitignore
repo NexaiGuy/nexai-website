@@ -53,3 +53,5 @@ netlify/functions-serve
 package-lock.json
 yarn.lock
 pnpm-lock.yamlsendgrid.env
+.env
+sendgrid.env
