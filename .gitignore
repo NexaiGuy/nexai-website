@@ -52,4 +52,4 @@ netlify/functions-serve
 # Package lock files (choose one)
 package-lock.json
 yarn.lock
-pnpm-lock.yaml
+pnpm-lock.yamlsendgrid.env
